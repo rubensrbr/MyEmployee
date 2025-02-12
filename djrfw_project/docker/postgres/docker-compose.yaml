@@ -1,0 +1,24 @@
+volumes:
+  myemployee_data:
+    name: myemployee_data
+
+networks:
+  myemployee_backend:
+    external: true
+
+services:
+  db:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - "myemployee_data:/var/lib/postgresql/data"
+    networks:
+      - myemployee_backend
