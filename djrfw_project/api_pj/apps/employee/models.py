@@ -8,7 +8,7 @@ import os
 def image_upload_to(instance, filename):
     file_hash = hashlib.md5(instance.photo.file.read()).hexdigest()
     filename, file_extension = os.path.splitext(filename)
-    return f"images/{file_hash}{file_extension}"
+    return f"uploads/{file_hash}{file_extension}"
 
 
 class CustomUser(AbstractUser):
