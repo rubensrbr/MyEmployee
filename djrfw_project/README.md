@@ -3,9 +3,10 @@
 3. Install uv: pip install uv
 4. Sync uv with pyproject.toml: uv sync
 5. Activate the virtual environment: source .venv/bin/activate
-6. Navigate to the docker directory and Build the Docker image for the database:cd docker && docker-compose build
-7. Start the Docker container for the database:cd && docker-compose up -d
-8. Apply the database dump: docker exec -i docker-db-1 psql -U postgres my_employee_db < dump.sql
+6. Create a file named .env with environment variables using .env.example as an example.
+7. Navigate to the docker directory and Build the Docker image for the database:cd docker && docker-compose build
+8. Start the Docker container for the database:cd && docker-compose up -d
+9. Apply the database dump: docker exec -i docker-db-1 psql -U postgres my_employee_db < dump.sql
 
 Running the Application
 
