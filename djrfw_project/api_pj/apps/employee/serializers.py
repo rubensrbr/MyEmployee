@@ -11,16 +11,55 @@ class AddressSerializer(serializers.ModelSerializer):
             "city",
             "postal_code",
             "employee",
-            "address_type",
+            "type_address",
         ]
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source="user.username")
-    # address = AddressSerializer(many=True)
+    # addresses = AddressSerializer(many=True)
 
     class Meta:
 
+        model = Employee
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "birth_date",
+            "job_title",
+            "start_date",
+            "user",
+            "photo",
+            # "addresses",
+        )
+
+
+class AddressTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AddressType
+        fields = [
+            "description",
+        ]
+
+
+class BasicAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = [
+            "country",
+            "state_province",
+            "city",
+            "postal_code",
+            "employee",
+            "type_address",
+        ]
+
+
+class BasicEmployeeSerializer(serializers.ModelSerializer):
+    addresses = AddressSerializer(many=True, read_only=True)
+
+    class Meta:
         model = Employee
         fields = [
             "id",
@@ -30,13 +69,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "job_title",
             "start_date",
             "user",
-            # "address",
-        ]
-
-
-class AddressTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AddressType
-        fields = [
-            "description",
+            "photo",
+            "addresses",
         ]

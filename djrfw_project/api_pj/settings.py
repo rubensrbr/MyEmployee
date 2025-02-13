@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-# import os
-# import sys
+import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# sys.path.insert(0, os.path.join(BASE_DIR, "api_pj", "apps"))
+sys.path.insert(0, os.path.join(BASE_DIR, "api_pj", "apps"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -82,7 +82,7 @@ WSGI_APPLICATION = "api_pj.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "my_employee",
+        "NAME": "my_employee_db",
         "USER": "postgres",
         "PASSWORD": "123456",
         "HOST": "localhost",
