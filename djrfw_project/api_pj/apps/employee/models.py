@@ -1,6 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+import hashlib
+import os
+
+
+def image_upload_to(instance, filename):
+    file_hash = hashlib.md5(instance.photo.file.read()).hexdigest()
+    filename, file_extension = os.path.splitext(filename)
+    return f"images/{file_hash}{file_extension}"
+
 
 class CustomUser(AbstractUser):
     pass
@@ -27,9 +36,7 @@ class Employee(models.Model):
     )
     birth_date = models.DateField()
     start_date = models.DateField()
-    photo = models.ImageField(
-        upload_to="uploads/%Y/%m/%d/",
-    )
+    photo = models.ImageField(upload_to=image_upload_to)
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.DO_NOTHING,
